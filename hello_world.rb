@@ -1,3 +1,6 @@
+a = 'hiroki'
+puts('Hello, ' + a)
+
 print "Hello World!"
 print "Hello World!!\n"
 
