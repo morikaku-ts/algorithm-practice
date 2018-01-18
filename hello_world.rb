@@ -1,5 +1,5 @@
 name = 'hiroki'
-puts "Hello,\ #{name}"
+puts "Hello, #{name}"
 
 print "Hello World!"
 print "Hello World!!\n"
