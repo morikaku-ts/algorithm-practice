@@ -17,3 +17,15 @@ end
 for i in 1..100 do
   odd_or_even(i)
 end
+
+def odd_or_even(num)
+  if num %2 == 0
+    puts "#{num} の1/2は#{num/2}です"
+  else
+    puts "#{num} の2倍は#{num*2}です"
+  end
+end
+
+for i in 1..10 do
+  odd_or_even(i)
+end
