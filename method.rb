@@ -8,10 +8,12 @@ add(2, 3)
 # 奇数か偶数かを判定
 def odd_or_even(num)
   if num %2 == 0
-    puts "偶数です"
+    puts "#{num} は偶数です"
   else
-    puts "奇数です"
+    puts "#{num} は奇数です"
   end
 end
 
-odd_or_even(2)
+for i in 1..100 do
+  odd_or_even(i)
+end
