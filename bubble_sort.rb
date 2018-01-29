@@ -22,7 +22,7 @@ bubble_sort([48, 53, 32, 21, 98, 6000, 54, 61, 70, 23, 2, 9, 7])
 
 puts
 
-puts "配列を皇潤に並び替え"
+puts "配列を降順に並び替え"
 def bubble_sort(numbers)
   elements = numbers.length
   repeat_times = elements - 1
