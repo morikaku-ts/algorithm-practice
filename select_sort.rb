@@ -1,23 +1,33 @@
-def select_sort(numbers)
-
-  index = 0
-  last_index_number = numbers.length - 1
-
+# 並べ替え方法はsorting_methodに以下のいずれかを指定する
+# 昇順の場合 -> "asc", 降順の場合 -> "desc"
+def select_sort(numbers, sorting_method:)
   puts "最初の配列"
   p numbers
-  puts "----------------"
 
-  for index in 0...last_index_number
-    minimum_number = numbers[index..last_index_number].min
-    minimum_number_index = numbers.index(minimum_number)
-  
-    numbers[index], numbers[minimum_number_index] = numbers[minimum_number_index], numbers[index]
-    p numbers
+  for index in 0...(numbers.length - 1)
+    case sorting_method
+    when "asc" then ascending_order(numbers, index)
+    when "desc" then descending_order(numbers, index)
+    end
   end
 
-  puts "----------------"
-  puts "最終昇順配列"
+  puts "最終昇順配列: #{sorting_method}"
   p numbers
 end
 
-select_sort([2, 43, 9, 16, 90, 6, 37, 5])
+def swap(numbers, index, exchange_number_index)
+  numbers[index], numbers[exchange_number_index] = numbers[exchange_number_index], numbers[index]
+end
+
+def ascending_order(numbers, index)
+  exchange_number_index = numbers.index(numbers[index...numbers.length].min)
+  swap(numbers, index, exchange_number_index)
+end
+
+def descending_order(numbers, index)
+  exchange_number_index = numbers.index(numbers[index...numbers.length].max)
+  swap(numbers, index, exchange_number_index)
+end
+
+select_sort([*1..100].shuffle.take(5), sorting_method: "asc")
+select_sort([*1..100].shuffle.take(5), sorting_method: "desc")
