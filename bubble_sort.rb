@@ -1,51 +1,37 @@
-puts "配列を昇順に並び替え"
-def bubble_sort_ascending_order(numbers)
-  elements = numbers.length
-  repeat_times = elements - 1
-
+# 並べ替え方法はsorting_methodに以下のいずれかを指定する
+# 昇順の場合 -> "asc", 降順の場合 -> "desc"
+def bubble_sort(numbers, sorting_method:)
   puts "最初の配列"
   p numbers
-  puts "---------------"
 
-  repeat_times.times do
-    for index in 0...repeat_times
-      if numbers[index] > numbers[index + 1]
-        numbers[index], numbers[index + 1] = numbers[index + 1], numbers[index]
+  for i in 1...(numbers.length)
+    for index in 0...(numbers.length - i)
+      case sorting_method
+      when "asc" then ascending_order(numbers, index)
+      when "desc" then descending_order(numbers, index)
       end
     end
-    p numbers
   end
 
-  puts "---------------"
-  puts "最終配列結果"
+  puts "最終配列結果:#{sorting_method}"
   p numbers
 end
 
-bubble_sort_ascending_order([48, 53, 32, 21, 98, 6000, 54, 61, 70, 23, 2, 9, 7])
-
-puts
-
-puts "配列を降順に並び替え"
-def bubble_sort_descending_order(numbers)
-  elements = numbers.length
-  repeat_times = elements - 1
-
-  puts "最初の配列"
-  p numbers
-  puts "---------------"
-
-  repeat_times.times do
-    for index in 0...repeat_times
-      if numbers[index] < numbers[index + 1]
-        numbers[index], numbers[index + 1] = numbers[index + 1], numbers[index]
-      end
-    end
-    p numbers
-  end
-
-  puts "---------------"
-  puts "最終配列結果"
-  p numbers
+def swap(numbers, index)
+  numbers[index], numbers[index + 1] = numbers[index + 1], numbers[index]
 end
 
-bubble_sort_descending_order([8, 6, 2, 18, 98, 47, 59, 61, 70, 6000, 89, 7])
+def ascending_order(numbers, index)
+  if numbers[index] > numbers[index + 1]
+    swap(numbers, index)
+  end
+end
+
+def descending_order(numbers, index)
+  if numbers[index] < numbers[index + 1]
+    swap(numbers, index)
+  end
+end
+
+bubble_sort([*0..200].shuffle.take(10), sorting_method: "asc")
+bubble_sort([*0..200].shuffle.take(10), sorting_method: "desc")
