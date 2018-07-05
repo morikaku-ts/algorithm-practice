@@ -4,14 +4,19 @@ def select_sort(numbers, sorting_method:)
   puts "最初の配列"
   p numbers
 
-  for index in 0...(numbers.length - 1)
-    case sorting_method
-    when "asc" then ascending_order(numbers, index)
-    when "desc" then descending_order(numbers, index)
+  begin
+    for index in 0...(numbers.length - 1)
+      case sorting_method
+      when "asc" then ascending_order(numbers, index)
+      when "desc" then descending_order(numbers, index)
+      else raise
+      end
     end
+  rescue
+    puts "Error: sorting_method: \"#{sorting_method}\"は、指定できません"
   end
 
-  puts "最終昇順配列: #{sorting_method}"
+  puts "最終配列結果:#{sorting_method}"
   p numbers
 end
 
@@ -31,3 +36,4 @@ end
 
 select_sort([*1..100].shuffle.take(5), sorting_method: "asc")
 select_sort([*1..100].shuffle.take(5), sorting_method: "desc")
+select_sort([*1..100].shuffle.take(5), sorting_method: "xxx")
