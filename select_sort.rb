@@ -4,34 +4,51 @@ def select_sort(numbers, sorting_method:)
   puts "最初の配列"
   p numbers
 
-  begin
-    for index in 0...(numbers.length - 1)
-      case sorting_method
-      when "asc" then ascending_order(numbers, index)
-      when "desc" then descending_order(numbers, index)
-      else raise
-      end
+  for index in 0...(numbers.length - 1)
+    exchange_index = index
+    case sorting_method
+    when "asc" then ascending_order(numbers, index, exchange_index)
+    when "desc" then descending_order(numbers, index, exchange_index)
+    else break puts "Error: sorting_method: \"#{sorting_method}\"は、指定できません"
     end
-  rescue
-    puts "Error: sorting_method: \"#{sorting_method}\"は、指定できません"
   end
 
   puts "最終配列結果:#{sorting_method}"
   p numbers
 end
 
-def swap(numbers, index, exchange_number_index)
-  numbers[index], numbers[exchange_number_index] = numbers[exchange_number_index], numbers[index]
+def swap(numbers, index, swap_index)
+  if index != swap_index
+    numbers[index], numbers[swap_index] = numbers[swap_index], numbers[index]
+  end
 end
 
-def ascending_order(numbers, index)
-  exchange_number_index = numbers.index(numbers[index...numbers.length].min)
-  swap(numbers, index, exchange_number_index)
+def minimum_number_index(numbers, index, exchange_index)
+  for compare_index in (index + 1)..(numbers.length - 1)
+    if numbers[exchange_index] > numbers[compare_index]
+      exchange_index = compare_index
+    end
+  end
+  exchange_index
 end
 
-def descending_order(numbers, index)
-  exchange_number_index = numbers.index(numbers[index...numbers.length].max)
-  swap(numbers, index, exchange_number_index)
+def maximum_number_index(numbers, index, exchange_index)
+  for compare_index in (index + 1)..(numbers.length - 1)
+    if numbers[exchange_index] < numbers[compare_index]
+      exchange_index = compare_index
+    end
+  end
+  exchange_index
+end
+
+def ascending_order(numbers, index, exchange_index)
+  swap_index = minimum_number_index(numbers, index, exchange_index)
+  swap(numbers, index, swap_index)
+end
+
+def descending_order(numbers, index, exchange_index)
+  swap_index = maximum_number_index(numbers, index, exchange_index)
+  swap(numbers, index, swap_index)
 end
 
 select_sort([*1..100].shuffle.take(5), sorting_method: "asc")
